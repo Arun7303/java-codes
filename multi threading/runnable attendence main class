@@ -1,0 +1,68 @@
+// Thread Attendance Class
+class ThreadAttendance extends Thread {
+    private String className; // Name of the class
+    private String[] students; // Array to store student names
+
+    // Constructor to initialize className and students array
+    public ThreadAttendance(String className, String[] students) {
+        this.className = className;
+        this.students = students;
+    }
+
+    // Override the run method of Thread class
+    @Override
+    public void run() {
+        // Print the attendance for the class
+        System.out.println("Attendance for " + className + ":");
+        // Iterate over the students array and print each student's name
+        for (String student : students) {
+            System.out.println(student + " is present");
+        }
+    }
+}
+
+// Runnable Attendance Class
+class RunnableAttendance implements Runnable {
+    private String studentName; // Name of the student
+
+    // Constructor to initialize studentName
+    public RunnableAttendance(String studentName) {
+        this.studentName = studentName;
+    }
+
+    // Override the run method of Runnable interface
+    @Override
+    public void run() {
+        // Simulate the student arriving late by printing a message
+        System.out.println(studentName + " is late for class.");
+    }
+}
+
+// Main Class
+public class Main {
+    public static void main(String[] args) {
+        // Creating instances of ThreadAttendance for different classes and starting them
+        ThreadAttendance class1Attendance = new ThreadAttendance("Math Class", new String[]{"Alice", "Bob", "Charlie"});
+        ThreadAttendance class2Attendance = new ThreadAttendance("Science Class", new String[]{"David", "Emily", "Frank"});
+        
+        class1Attendance.start();
+        class2Attendance.start();
+
+        // Creating instances of RunnableAttendance for different students and executing them using a single thread
+        RunnableAttendance student1 = new RunnableAttendance("John");
+        RunnableAttendance student2 = new RunnableAttendance("Mary");
+
+        Thread studentThread = new Thread(student1);
+        studentThread.start();
+
+        // Wait for student1 thread to complete before executing student2
+        try {
+            studentThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Thread student2Thread = new Thread(student2);
+        student2Thread.start();
+    }
+}

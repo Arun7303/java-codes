@@ -1,0 +1,71 @@
+public class Person {
+    // Attributes
+    protected String name;
+    protected int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display information
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+
+
+
+
+
+public interface Researcher {
+    void conductResearch(String topic);
+}
+
+
+
+
+
+public class Professor extends Person implements Researcher {
+    // Additional attributes
+    private String employeeId;
+    private String department;
+    private String teachingSubject;
+
+    // Constructor
+    public Professor(String name, int age, String employeeId, String department, String teachingSubject) {
+        super(name, age);  // Calls the constructor of Person
+        this.employeeId = employeeId;
+        this.department = department;
+        this.teachingSubject = teachingSubject;
+    }
+
+    // Method to conduct a lecture
+    public void conductLecture() {
+        System.out.println(name + " is conducting a lecture on " + teachingSubject + ".");
+    }
+
+    // Implement the conductResearch method from Researcher interface
+    @Override
+    public void conductResearch(String topic) {
+        System.out.println(name + " is conducting research on " + topic + ".");
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Person
+        System.out.println("Employee ID: " + employeeId + ", Department: " + department + ", Teaching Subject: " + teachingSubject);
+    }
+
+    // Main method to test the classes
+    public static void main(String[] args) {
+        // Create a Professor object
+        Professor prof = new Professor("Dr. Smith", 45, "P12345", "Computer Science", "Machine Learning");
+        prof.displayInfo();
+        prof.conductLecture();
+        prof.conductResearch("Artificial Intelligence");
+    }
+}

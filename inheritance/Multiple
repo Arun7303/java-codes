@@ -1,0 +1,120 @@
+// Base class: Person
+public class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+// Interface: Researcher
+interface Researcher {
+    void conductResearch(String topic);
+}
+
+// Interface: Instructor
+interface Instructor {
+    void conductLecture();
+}
+
+
+
+// Professor class
+public class Professor extends Person implements Researcher, Instructor {
+    protected String employeeId;
+    protected String department;
+    protected String teachingSubject;
+
+    public Professor(String name, int age, String employeeId, String department, String teachingSubject) {
+        super(name, age);
+        this.employeeId = employeeId;
+        this.department = department;
+        this.teachingSubject = teachingSubject;
+    }
+
+    @Override
+    public void conductLecture() {
+        System.out.println(name + " is conducting a lecture on " + teachingSubject + ".");
+    }
+
+    @Override
+    public void conductResearch(String topic) {
+        System.out.println(name + " is conducting research on " + topic + ".");
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Employee ID: " + employeeId + ", Department: " + department + ", Teaching Subject: " + teachingSubject);
+    }
+}
+
+
+
+// GraduateStudent class
+public class GraduateStudent extends Person implements Researcher {
+    protected String studentId;
+    protected String major;
+    protected String researchTopic;
+
+    public GraduateStudent(String name, int age, String studentId, String major, String researchTopic) {
+        super(name, age);
+        this.studentId = studentId;
+        this.major = major;
+        this.researchTopic = researchTopic;
+    }
+
+    @Override
+    public void conductResearch(String topic) {
+        System.out.println(name + " is conducting research on " + topic + ".");
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Student ID: " + studentId + ", Major: " + major + ", Research Topic: " + researchTopic);
+    }
+}
+
+
+
+
+
+// TeachingAssistant class
+public class TeachingAssistant extends GraduateStudent implements Instructor {
+    private String taId;
+
+    public TeachingAssistant(String name, int age, String studentId, String major, String researchTopic, String taId) {
+        super(name, age, studentId, major, researchTopic);
+        this.taId = taId;
+    }
+
+    @Override
+    public void conductLecture() {
+        System.out.println(name + " is conducting a lecture as a teaching assistant.");
+    }
+
+    public void assistProfessor() {
+        System.out.println(name + " with TA ID: " + taId + " is assisting the professor.");
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("TA ID: " + taId);
+    }
+
+    public static void main(String[] args) {
+        TeachingAssistant ta = new TeachingAssistant("Alice", 28, "S12345", "Physics", "Quantum Mechanics", "TA6789");
+        ta.displayInfo();
+        ta.conductResearch("Quantum Computing");
+        ta.conductLecture();
+        ta.assistProfessor();
+    }
+}

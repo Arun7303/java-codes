@@ -1,0 +1,105 @@
+public class Person {
+    // Attributes
+    protected String name;
+    protected int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display information
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+
+
+public class Student extends Person {
+    // Additional attributes
+    protected String studentId;
+    protected String major;
+
+    // Constructor
+    public Student(String name, int age, String studentId, String major) {
+        super(name, age);  // Calls the constructor of Person
+        this.studentId = studentId;
+        this.major = major;
+    }
+
+    // Method to enroll in a course
+    public void enrollCourse(String course) {
+        System.out.println(name + " has enrolled in " + course + ".");
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Person
+        System.out.println("Student ID: " + studentId + ", Major: " + major);
+    }
+}
+
+
+
+public class GraduateStudent extends Student {
+    // Additional attribute
+    private String researchTopic;
+
+    // Constructor
+    public GraduateStudent(String name, int age, String studentId, String major, String researchTopic) {
+        super(name, age, studentId, major);  // Calls the constructor of Student
+        this.researchTopic = researchTopic;
+    }
+
+    // Method to conduct research
+    public void conductResearch() {
+        System.out.println(name + " is conducting research on " + researchTopic + ".");
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Student
+        System.out.println("Research Topic: " + researchTopic);
+    }
+
+    // Main method to test the classes
+    public static void main(String[] args) {
+        // Create a GraduateStudent object
+        GraduateStudent gradStudent = new GraduateStudent("Jane Doe", 25, "G12345", "Computer Science", "AI in Healthcare");
+        gradStudent.displayInfo();
+        gradStudent.enrollCourse("Machine Learning");
+        gradStudent.conductResearch();
+    }
+}
+
+
+
+public class UndergraduateStudent extends Student {
+    // Additional attribute
+    private String minor;
+
+    // Constructor
+    public UndergraduateStudent(String name, int age, String studentId, String major, String minor) {
+        super(name, age, studentId, major);  // Calls the constructor of Student
+        this.minor = minor;
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Student
+        System.out.println("Minor: " + minor);
+    }
+
+    // Main method to test the classes
+    public static void main(String[] args) {
+        // Create an UndergraduateStudent object
+        UndergraduateStudent undergradStudent = new UndergraduateStudent("John Doe", 20, "U12345", "Electrical Engineering", "Mathematics");
+        undergradStudent.displayInfo();
+        undergradStudent.enrollCourse("Circuits 101");
+    }
+}

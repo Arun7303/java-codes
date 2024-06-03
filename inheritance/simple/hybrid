@@ -1,0 +1,56 @@
+// Interface for vehicles
+interface Vehicle {
+    void start();
+    void stop();
+}
+
+// Interface for flying vehicles
+interface FlyingVehicle {
+    void takeOff();
+    void land();
+}
+
+// Interface for land vehicles
+interface LandVehicle {
+    void drive();
+}
+
+// Concrete class implementing both FlyingVehicle and LandVehicle
+class Airplane implements FlyingVehicle, LandVehicle {
+    public void start() {
+        System.out.println("Airplane started.");
+    }
+
+    public void stop() {
+        System.out.println("Airplane stopped.");
+    }
+
+    public void takeOff() {
+        System.out.println("Airplane took off.");
+    }
+
+    public void land() {
+        System.out.println("Airplane landed.");
+    }
+
+    public void drive() {
+        System.out.println("Airplane is driving on the runway.");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Airplane airplane = new Airplane();
+        
+        // Using methods from Vehicle interface
+        airplane.start();
+        airplane.stop();
+        
+        // Using methods from FlyingVehicle interface
+        airplane.takeOff();
+        airplane.land();
+        
+        // Using methods from LandVehicle interface
+        airplane.drive();
+    }
+}

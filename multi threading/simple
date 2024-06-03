@@ -1,0 +1,33 @@
+// Define a class that extends the Thread class
+class MyThread extends Thread {
+    private String threadName;
+
+    MyThread(String name) {
+        this.threadName = name;
+    }
+
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(threadName + " is running: " + i);
+            try {
+                // Sleep for a while to simulate some work being done
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.println(threadName + " interrupted.");
+            }
+        }
+        System.out.println(threadName + " exiting.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create two threads
+        MyThread thread1 = new MyThread("Thread-1");
+        MyThread thread2 = new MyThread("Thread-2");
+
+        // Start the threads
+        thread1.start();
+        thread2.start();
+    }
+}

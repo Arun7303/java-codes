@@ -1,0 +1,74 @@
+public class Person {
+    // Attributes
+    protected String name;
+    protected int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display information
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+
+
+
+public class Student extends Person {
+    // Additional attributes
+    private String studentId;
+    private String major;
+
+    // Constructor
+    public Student(String name, int age, String studentId, String major) {
+        super(name, age);  // Calls the constructor of Person
+        this.studentId = studentId;
+        this.major = major;
+    }
+
+    // Method to enroll in a course
+    public void enrollCourse(String course) {
+        System.out.println(name + " has enrolled in " + course + ".");
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Person
+        System.out.println("Student ID: " + studentId + ", Major: " + major);
+    }
+}
+
+
+
+
+
+public class GraduateStudent extends Student {
+    // Additional attribute
+    private String thesisTitle;
+
+    // Constructor
+    public GraduateStudent(String name, int age, String studentId, String major, String thesisTitle) {
+        super(name, age, studentId, major);  // Calls the constructor of Student
+        this.thesisTitle = thesisTitle;
+    }
+
+    // Override method to display information
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Calls the displayInfo method of Student
+        System.out.println("Thesis Title: " + thesisTitle);
+    }
+
+    // Main method to test the classes
+    public static void main(String[] args) {
+        // Create a GraduateStudent object
+        GraduateStudent gradStudent = new GraduateStudent("Jane Doe", 25, "G12345", "Computer Science", "AI in Healthcare");
+        gradStudent.displayInfo();
+        gradStudent.enrollCourse("Machine Learning");
+    }
+}

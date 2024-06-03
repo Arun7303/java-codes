@@ -1,0 +1,83 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Course {
+    private String courseId;
+    private String courseName;
+    private ArrayList<String> studentsEnrolled;
+
+    // Constructor
+    public Course(String courseId, String courseName) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.studentsEnrolled = new ArrayList<>();
+    }
+
+    // Method to add a student to the course
+    public void addStudent(String studentId, String studentName) {
+        String entry = studentId + ": " + studentName;
+        studentsEnrolled.add(entry);
+    }
+
+    // Method to display course details
+    public void displayCourseDetails() {
+        System.out.println("Course ID: " + courseId);
+        System.out.println("Course Name: " + courseName);
+        System.out.println("Students Enrolled:");
+        for (String student : studentsEnrolled) {
+            System.out.println(student);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Course course = null;
+
+        while (true) {
+            System.out.println("Choose an option:");
+            System.out.println("1. Enter Course Details");
+            System.out.println("2. View Course Details");
+            System.out.println("3. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter Course ID:");
+                    String courseId = scanner.nextLine();
+
+                    System.out.println("Enter Course Name:");
+                    String courseName = scanner.nextLine();
+
+                    course = new Course(courseId, courseName);
+
+                    System.out.println("Enter Student ID:");
+                    String studentId = scanner.nextLine();
+
+                    System.out.println("Enter Student Name:");
+                    String studentName = scanner.nextLine();
+
+                    course.addStudent(studentId, studentName);
+
+                    System.out.println("Course details added successfully!");
+                    break;
+                case 2:
+                    if (course != null) {
+                        course.displayCourseDetails();
+                    } else {
+                        System.out.println("No course details available. Please enter course details first.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option (1-3).");
+            }
+        }
+    }
+}

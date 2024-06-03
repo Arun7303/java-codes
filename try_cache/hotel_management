@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+class Reservation {
+    private int roomNumber;
+    private int numberOfGuests;
+    private String reservationDate;
+
+    // Method to gather reservation details from the user
+    public void gatherReservationDetails() {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.println("Enter Room Number:");
+            roomNumber = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Enter Number of Guests:");
+            numberOfGuests = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Enter Reservation Date:");
+            reservationDate = scanner.nextLine();
+
+            // Validate input
+            if (roomNumber <= 0 || numberOfGuests <= 0 || reservationDate.isEmpty()) {
+                throw new IllegalArgumentException("Invalid input! Room number, number of guests, and reservation date cannot be negative or empty.");
+            }
+
+            System.out.println("Reservation details:");
+            System.out.println("Room Number: " + roomNumber);
+            System.out.println("Number of Guests: " + numberOfGuests);
+            System.out.println("Reservation Date: " + reservationDate);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid numeric values for room number and number of guests.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Reservation reservation = new Reservation();
+        reservation.gatherReservationDetails();
+    }
+}

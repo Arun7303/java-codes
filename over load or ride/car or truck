@@ -1,0 +1,35 @@
+// Abstract class Vehicle
+abstract class Vehicle {
+    // Abstract method engine
+    public abstract void engine();
+}
+
+// Car class inheriting from Vehicle
+class Car extends Vehicle {
+    // Implementing the engine method for Car
+    @Override
+    public void engine() {
+        System.out.println("Car has good engine");
+    }
+}
+
+// Truck class inheriting from Vehicle
+class Truck extends Vehicle {
+    // Implementing the engine method for Truck
+    @Override
+    public void engine() {
+        System.out.println("Truck has bad engine");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects of Car and Truck
+        Car car = new Car();
+        Truck truck = new Truck();
+        
+        // Calling the engine method for Car and Truck
+        car.engine();   // Output: Car has good engine
+        truck.engine(); // Output: Truck has bad engine
+    }
+}

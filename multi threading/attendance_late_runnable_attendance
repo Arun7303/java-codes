@@ -1,0 +1,52 @@
+// Thread Attendance Class
+class ThreadAttendance extends Thread {
+    private String className; // Name of the class
+    private String[] students; // Array to store student names
+
+    // Constructor to initialize className and students array
+    public ThreadAttendance(String className, String[] students) {
+        this.className = className;
+        this.students = students;
+    }
+
+    // Override the run method of Thread class
+    @Override
+    public void run() {
+        // Print the attendance for the class
+        System.out.println("Attendance for " + className + ":");
+        // Iterate over the students array and print each student's name
+        for (String student : students) {
+            System.out.println(student + " is present");
+        }
+    }
+}
+
+
+class RunnableAttendance implements Runnable {
+    private String studentName;
+
+    // Constructor to initialize studentName
+    public RunnableAttendance(String studentName) {
+        this.studentName = studentName;
+    }
+
+    // Override the run method of Runnable interface
+    @Override
+    public void run() {
+        // Simulate the student arriving late by printing a message
+        System.out.println(studentName + " is late for class.");
+    }
+
+    // Main method (just for testing)
+    public static void main(String[] args) {
+        // Create instances of RunnableAttendance representing different students
+        RunnableAttendance student1 = new RunnableAttendance("Alice");
+        RunnableAttendance student2 = new RunnableAttendance("Bob");
+
+        // Create threads for each student and start them
+        Thread thread1 = new Thread(student1);
+        Thread thread2 = new Thread(student2);
+        thread1.start();
+        thread2.start();
+    }
+}

@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+class Reservation {
+    private int roomNumber;
+    private int numberOfGuests;
+    private String reservationDate;
+    private String guestName;
+
+    // Default constructor
+    public Reservation() {
+    }
+
+    // Constructor with parameters
+    public Reservation(int roomNumber, int numberOfGuests, String guestName, String reservationDate) {
+        this.roomNumber = roomNumber;
+        this.numberOfGuests = numberOfGuests;
+        this.guestName = guestName;
+        this.reservationDate = reservationDate;
+    }
+
+    // Method to gather reservation details from the user
+    public void gatherReservationDetails() {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.println("Enter Room Number:");
+            roomNumber = Integer.parseInt(scanner.nextLine());
+            if (roomNumber <= 0) {
+                throw new IllegalArgumentException("Room number cannot be negative or zero.");
+            }
+
+            System.out.println("Enter Number of Guests:");
+            numberOfGuests = Integer.parseInt(scanner.nextLine());
+            if (numberOfGuests <= 0) {
+                throw new IllegalArgumentException("Number of guests cannot be negative or zero.");
+            }
+
+            System.out.println("Enter Guest Name:");
+            guestName = scanner.nextLine();
+            if (guestName.isEmpty()) {
+                throw new IllegalArgumentException("Guest name cannot be null or empty.");
+            }
+
+            System.out.println("Enter Reservation Date:");
+            reservationDate = scanner.nextLine();
+            if (reservationDate.isEmpty()) {
+                throw new IllegalArgumentException("Reservation date cannot be null or empty.");
+            }
+
+            System.out.println("Reservation details:");
+            System.out.println("Room Number: " + roomNumber);
+            System.out.println("Number of Guests: " + numberOfGuests);
+            System.out.println("Guest Name: " + guestName);
+            System.out.println("Reservation Date: " + reservationDate);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid numeric values for room number and number of guests.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Test default constructor
+        Reservation reservation1 = new Reservation();
+        System.out.println("Reservation 1 details:");
+        reservation1.gatherReservationDetails();
+
+        // Test constructor with parameters
+        Reservation reservation2 = new Reservation(101, 2, "John Doe", "2024-06-05");
+        System.out.println("\nReservation 2 details:");
+        System.out.println("Room Number: " + reservation2.roomNumber);
+        System.out.println("Number of Guests: " + reservation2.numberOfGuests);
+        System.out.println("Guest Name: " + reservation2.guestName);
+        System.out.println("Reservation Date: " + reservation2.reservationDate);
+    }
+}

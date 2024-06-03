@@ -1,0 +1,81 @@
+// Base class Account
+class Account {
+    protected double balance; // Changed access to protected
+
+    public Account(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    // Method for depositing money
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println(amount + " deposited successfully.");
+    }
+
+    // Method for withdrawing money
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn successfully.");
+        } else {
+            System.out.println("Insufficient funds.");
+        }
+    }
+}
+
+// Derived class SavingsAccount from Account
+class SavingsAccount extends Account {
+    public SavingsAccount(double initialBalance) {
+        super(initialBalance);
+    }
+
+    // Method overloading for withdraw() with an additional parameter for reason
+    public void withdraw(double amount, String reason) {
+        // No additional processing for savings account withdrawal
+        super.withdraw(amount);
+        System.out.println("Withdrawal reason: " + reason);
+    }
+}
+
+// Derived class CheckingAccount from Account
+class CheckingAccount extends Account {
+    private double overdraftLimit;
+
+    public CheckingAccount(double initialBalance, double overdraftLimit) {
+        super(initialBalance);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    // Method overriding for withdraw() to introduce overdraft protection
+    @Override
+    public void withdraw(double amount) {
+        if (balance + overdraftLimit >= amount) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn successfully.");
+        } else {
+            System.out.println("Insufficient funds with overdraft protection.");
+        }
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        // Instantiate a SavingsAccount object
+        SavingsAccount savingsAccount = new SavingsAccount(1000);
+        savingsAccount.deposit(500); // depositing 500
+        savingsAccount.withdraw(200); // withdrawing 200
+
+        System.out.println("Savings Account Balance: " + savingsAccount.getBalance());
+
+        // Instantiate a CheckingAccount object
+        CheckingAccount checkingAccount = new CheckingAccount(2000, 500);
+        checkingAccount.deposit(300); // depositing 300
+        checkingAccount.withdraw(2500); // withdrawing 2500
+
+        System.out.println("Checking Account Balance: " + checkingAccount.getBalance());
+    }
+}
